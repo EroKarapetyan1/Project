@@ -25,6 +25,11 @@ const productApi = {
         },
     }),
     PutProducts: (id, token) => axiosInstance.put(`/PutProducts/${id}`),
+
+    PasswordChangeChechk: (data) => axiosInstance.put(`/auth/forgot-password-check`, data),
+
+    PasswordChange: (data) => axiosInstance.put(`/auth/forgot-password`, data),
+
     getPhoneById: (id) => axiosInstance.get(`/phone/${id}`),
     Likes: (id) => axiosInstance.put(`/add-like/${id}`),
 

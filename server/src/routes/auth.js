@@ -138,28 +138,51 @@ router.put("/forgot-password", async (req, res) => {
     subject: "reset code",
     text: resetCode
   })
-  res.status(200).json({message : "SUCCESS"})
+  res.status(200).json({ message: "SUCCESS" })
 })
 
 
 
 router.put("/forgot-password-check", async (req, res) => {
+
+
+
   const { email, resetCode, password } = req.body
+
+
   const user = await UserModel.findOne({ email })
+
 
   if (!user) {
     return res.status(404).json({ message: "user not found" })
 
   }
+
   if (user.resetCode !== resetCode) {
     return res.status(400).json({ message: "invalid resest code" })
 
   }
+
+
   const hashedPassword = await bcrypt.hash(password, 10)
+
+
   user.password = hashedPassword
+
+
   user.resetCode = null
-   await user.save()
-   res.status(200).json({message : "success"})
+
+
+  await user.save()
+
+
+  res.status(200).json({ message: "success" })
+
+
 })
+
+
+
+
 
 module.exports = router

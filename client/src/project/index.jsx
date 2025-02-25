@@ -14,6 +14,7 @@ import { SignIn } from "./components/signIn/signIn";
 import { Profile } from "./components/Profile/profile";
 import { ProductFilter } from "./components/filter/product-filter";
 import { CartPage } from "./components/Korzina/cartpage";
+import { ForgotPassword } from "./components/forgot-password";
 
 
 
@@ -36,6 +37,7 @@ export const Main = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/product-filter/:brand" element={<ProductFilter/>}/> 
                 <Route path="/basket" element={<CartPage/>}/> 
+                <Route path="/ForgorPassword" element={<ForgotPassword/>}/> 
 
             </Routes>
 

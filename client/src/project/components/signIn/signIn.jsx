@@ -13,12 +13,12 @@ export const SignIn = () => {
     };
     useEffect(() => {
         console.log(token);
-        
+
         if (token) {
-             navigate("/profile")
+            navigate("/profile")
         }
 
-    } , [])
+    }, [])
     const token = localStorage.getItem("token");
 
     // const Login = async () => {
@@ -68,6 +68,7 @@ export const SignIn = () => {
                 <InputWrapper1>
                     <input type="text" name="email" placeholder="Email" onChange={handleChange} />
                     <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+                    <h6>forgot password? <a href="/ForgorPassword">reset</a> </h6>
                     <Button onClick={Login}>
                         Login
                     </Button>
