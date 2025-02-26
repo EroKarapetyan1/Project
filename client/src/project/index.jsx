@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MyContact, MyHome } from "./components";
@@ -19,12 +19,13 @@ import { ForgotPassword } from "./components/forgot-password";
 
 
 export const Main = () => {
+    const [search , setSearch] = useState("")
     return (
         <Router>
-            <MyHeader />
+            <MyHeader fun={setSearch}/>
 
             <Routes>
-                <Route path="/" element={<MyHome />} />
+                <Route path="/" element={<MyHome search={search}/>} />
                 <Route path="/contact" element={<MyContact />} />
                 <Route path="/phones" element={<Phones />} />
                 <Route path="/Watches" element={<Watches />} />

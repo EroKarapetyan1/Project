@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, InputWrapper1, MainDiv1 } from "./styledSignIn";
+import {  MainDiv1 } from "./styledSignIn";
 import { useNavigate } from "react-router-dom";
 import productApi from "../../api/servicesApi";
+import { Button, InputWrapper1 } from "../../../globalStyles";
 
 export const SignIn = () => {
     const navigate = useNavigate()
@@ -69,6 +70,7 @@ export const SignIn = () => {
                     <input type="text" name="email" placeholder="Email" onChange={handleChange} />
                     <input type="password" name="password" placeholder="Password" onChange={handleChange} />
                     <h6>forgot password? <a href="/ForgorPassword">reset</a> </h6>
+                    <h6>not have an account? <a href="/SignUp">register</a> </h6>
                     <Button onClick={Login}>
                         Login
                     </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { FaLaptop } from "react-icons/fa";
 import { BsSmartwatch } from "react-icons/bs";
@@ -6,51 +6,64 @@ import { BsGpuCard } from "react-icons/bs";
 import { PiComputerTowerBold } from "react-icons/pi";
 import { FaHeadphones } from "react-icons/fa";
 import { Items, ItemsContainer, StyledLink } from "./styledItems";
+import { Link } from "react-router-dom";
 
 export const ItemsDiv = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
 
+    
+
     return (
         <>
 
             <ItemsContainer>
-                <Items>
-                    <StyledLink to="/phones">
+                <StyledLink to="/phones">
+
+                    <Items >
+
                         <MdOutlineSmartphone />
                         <p>Հեռախոսներ</p>
-                    </StyledLink>
-                </Items>
-                <Items>
-                    <StyledLink to="/notebooks">
+
+                    </Items>
+                </StyledLink>
+
+
+                <StyledLink to="/notebooks">
+                    <Items>
                         <FaLaptop />
                         <p>Նոութբուք</p>
-                    </StyledLink>
-                </Items>
-                <Items>
-                    <StyledLink to="/Watches">
+                    </Items>
+                </StyledLink>
+                <StyledLink to="/Watches">
+
+                    <Items>
                         <BsSmartwatch />
                         <p>Ժամացույցներ</p>
-                    </StyledLink>
-                </Items>
-                <Items>
-                    <StyledLink to="/gpu">
+                    </Items>
+                </StyledLink>
+                <StyledLink to="/gpu">
+
+                    <Items>
                         <BsGpuCard />
                         <p>Տեսա քարտ</p>
-                    </StyledLink>
-                </Items>
-                <Items>
-                    <StyledLink to="/pc">
+                    </Items>
+                </StyledLink>
+                <StyledLink to="/pc">
+
+                    <Items>
                         <PiComputerTowerBold />
                         <p>համակարգիչներ</p>
-                    </StyledLink>
-                </Items>
-                <Items>
-                    <StyledLink to="/accessories">
+                    </Items>
+                </StyledLink>
+                <StyledLink to="/accessories">
+
+                    <Items>
                         <FaHeadphones />
                         <p>Աքսեսուարներ</p>
-                    </StyledLink>
-                </Items>
+                    </Items>
+                </StyledLink>
+
             </ItemsContainer>
         </>
     );

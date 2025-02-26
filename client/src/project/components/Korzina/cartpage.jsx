@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { IconSpan, MainDiv, Name, Price, ProductCard, Img, IconSpan1 } from "../../../globalStyles";
+import { IconSpan, MainDiv, Name, Price, ProductCard, Img, IconSpan1, Button } from "../../../globalStyles";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import productApi from "../../api/servicesApi";
@@ -129,9 +129,9 @@ export const CartPage = () => {
     return (
         <>
             <hr /><hr /><hr /><hr />
-            <button onClick={clearBasket} style={{ padding: "10px", background: "black", color: "white" }}>
+            <Button onClick={clearBasket} style={{ position: 'fixed', zIndex: '999' }}>
                 Clear Basket
-            </button>
+            </Button>
 
             <Main>
                 {product.length > 0 && product.map(e => (

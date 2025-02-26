@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Div, Name, ProfileDiv } from "./profileStyle";
 import productApi from "../../api/servicesApi";
-import { Button, InputWrapper1 } from "../signIn/styledSignIn";
+import { Button } from "../../../globalStyles";
+
 
 export const Profile = () => {
     const [value, setValue] = useState({});

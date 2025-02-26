@@ -17,6 +17,64 @@ export const Price = styled.div`
  
 `;
 
+
+export const Button = styled.button`
+color: #ccc;
+  border-radius: 20px;
+  /* background: transparent;   */
+  background-color: #3c7cb3;
+  border: none;   
+  padding: 10px 20px;       
+  cursor: pointer;    
+    transition: all 0.3s ease-in-out; 
+
+  &:hover{
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; 
+    transform: scale(1.2);
+  }      
+`;
+
+export const InputWrapper1 = styled.div`
+
+display: flex;
+flex-direction: column;
+gap: 10px;
+align-items: center;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+justify-content: center;
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin-right: 20px;
+  @media(max-width: 700px){
+    width: 230px;
+  }
+  @media (max-width: 450px) {
+    width: 150px;
+  }
+  input{
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    border: 1px solid black;
+    
+position: relative;
+
+padding-left: 20px;
+@media (max-width: 700px) {
+ width : 200px;
+}
+@media (max-width: 450px) {
+  width: 100px;
+}
+
+
+  }
+`;
+
+
+
 export const ProductCard = styled.div`
   color: black;
   padding: 15px;
@@ -26,12 +84,15 @@ export const ProductCard = styled.div`
   height: auto;
   gap: 10px;
   justify-content: space-between;  
-
+/* background-color: blue; */
+background: transparent;
   &:hover ${Price} {
-    color: green;  
+    /* color: green;   */
+    color: #3c7cb3;
     transition: all 0.3s ease-in-out; 
 
   }
+  
 `;
 
 export const IconSpan = styled.span`
@@ -90,9 +151,11 @@ export const IconSpan1 = styled.span`
 
 
 export const MainDiv = styled.div`
+/* background: transparent; */
   display: flex;       
   justify-content: center; 
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;   */
+  /* background-color: red; */
   width: 300px;
   margin: 20px;
   object-fit: cover;
@@ -113,6 +176,8 @@ export const MainDiv = styled.div`
     cursor: pointer;
     transform: scale(1.05);
     transition: 0.3s ease-in-out;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+
   }
 `;
 
@@ -122,6 +187,9 @@ export const Main = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 100px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+  /* background-color: red; */
+
   
   
 `;

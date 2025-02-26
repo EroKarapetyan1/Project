@@ -10,16 +10,30 @@ import { Loginicon } from "../signUp/signUpicon";
 import { Filter } from "../filter/Filter";
 import { IconSpan } from "../../../globalStyles";
 import { ProductFilter } from "../filter/product-filter";
-export const MyHeader = () => {
+export const MyHeader = ({fun}) => {
   const [isActive, setIsActive] = useState(false)
   const [filtred, setFiltres] = useState([])
   const inputRef = useRef(null);
 
- 
+
   document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, options);
   });
+
+  const handleSearchClick = () => {
+    setIsActive((e) => !e);
+    // if (inputRef.current) {
+    //   inputRef.current.focus();
+    // }
+
+
+
+    // const newArr = product.filter(el => el.modelName.toLowerCase().includes(el.target.value.toLowerCase()))
+    // setFiltres(newArr)
+  };
+
+
   return (
     <>
       {/* <HeaderDiv>
@@ -55,17 +69,21 @@ export const MyHeader = () => {
 
           </Img1>
         </StyledLink>
-       
-<ProductFilter/>
 
 
+        <IconSpan>
+          <IoSearch onClick={handleSearchClick} style={{ cursor: "pointer", }} />
+        </IconSpan>
 
-
-       
 
         {isActive && <>
 
 
+          <InputWrapper>
+
+            <input type="text" onChange={(e) => fun(e.target.value)}/>
+
+          </InputWrapper>
         </>}
         <HeaderIcon>
 

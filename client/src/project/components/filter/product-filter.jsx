@@ -9,25 +9,10 @@ import { IoSearch } from "react-icons/io5";
 
 
 export const ProductFilter = () => {
-    const handleSearchClick = () => {
-        // setIsActive((e) => !e);
-        // if (inputRef.current) {
-        //   inputRef.current.focus();
-        // }
-        const newArr = product.filter(el => el.modelName.toLowerCase().includes(el.target.value.toLowerCase()))
-        setFiltres(newArr)
-      };
+    
     return (
         <>
-         <IconSpan>
-          {/* <IoSearch onClick={handleSearchClick} style={{ cursor: "pointer", }} /> */}
-
-        </IconSpan>
-            <InputWrapper>
-
-                <input type="text" onChange={handleSearchClick}/>
-
-            </InputWrapper>
+        
 
         </>
     )

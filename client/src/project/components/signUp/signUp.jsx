@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { Button, InputWrapper1, MainDiv1 } from "./styledSignUp";
+import {  MainDiv1 } from "./styledSignUp";
 import productApi from "../../api/servicesApi";
+import { Button, InputWrapper1 } from "../../../globalStyles";
 
 export const SignUp = () => {
     const navigate = useNavigate()

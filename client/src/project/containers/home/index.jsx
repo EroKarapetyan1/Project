@@ -9,12 +9,23 @@ import { IoSearch } from "react-icons/io5";
 import { IconSpan1, Img, Main, MainDiv, Name, Price, ProductCard } from "../../../globalStyles";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
-export const MyHome = () => {
+export const MyHome = ({search}) => {
     const fetchedItems = useFetchProducts();
     const [items, setItems] = useState([]);
+    const [user, setUser] = useState({});
     const userId = localStorage.getItem("userId");
-
-
+    const filteredItems = items.filter((item) => true );
+    useEffect(() => {
+        const getData = async() => {
+            const token = localStorage.getItem("token")
+            if(!token) return
+            const res = await productApi.profile(token)
+            setUser(res.data)
+        }
+        getData()
+    } , [])
+    console.log(user);
+    
     useEffect(() => {
         setItems(fetchedItems);
     }, [fetchedItems]);
@@ -28,11 +39,7 @@ export const MyHome = () => {
 
         try {
             const response = await productApi.addToBasket(token, id);
-            if (response.data.status === "added") {
-
-            } else if (response.data.status === "removed") {
-
-            }
+          
 
 
             setItems((prevItems) =>
@@ -46,20 +53,22 @@ export const MyHome = () => {
                         : item
                 )
             );
+            
         } catch (error) {
             console.error("Error updating basket:", error);
         }
     };
-
+    console.log(filteredItems);
+    
     return (
         <>
             <MyCarousel />
             <ItemsDiv />
             <Main>
-                {items.map((e) => (
+                {filteredItems.filter(name => name.modelName.toUpperCase().includes(search.toUpperCase())).map((e) => (
                     <MainDiv key={e._id}>
                         <ProductCard>
-                            {e.basket?.includes(userId) ? (
+                            {user?.basket?.includes(e._id) ? (
                                 <IconSpan1 onClick={() => addToBasket(e._id)}>
                                     <IoMdHeart />
                                 </IconSpan1>

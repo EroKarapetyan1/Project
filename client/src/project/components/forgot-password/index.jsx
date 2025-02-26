@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, InputWrapper1, MainDiv1 } from "../signUp/styledSignUp";
+import { MainDiv1 } from "../signUp/styledSignUp";
 import productApi from "../../api/servicesApi";
 import { useNavigate } from "react-router-dom";
+import { Button, InputWrapper1 } from "../../../globalStyles";
 
 
 export const ForgotPassword = () => {
@@ -22,13 +23,14 @@ const nav = useNavigate()
 
 
 
-    const verify = async () => {
+    const Change = async () => {
         
         const res = await productApi.PasswordChangeChechk({ resetCode: value.resetCode, email: value.email, password: value.password })
 
         console.log(res);
         if (res.status === 200) {
-            nav('/SignIn')
+            alert('password changed pls login')
+             nav('/SignIn')
             
         }
     }
@@ -44,7 +46,7 @@ const nav = useNavigate()
 
 
         <>
-            <br /><br /><br /><br /><br />
+
             <MainDiv1>
                 <InputWrapper1>
                     <input type="text" name="email" placeholder="pls enter your email" value={value.email} onChange={handleChange} />
@@ -56,7 +58,7 @@ const nav = useNavigate()
                         <input type="text" name="password" placeholder="pls enter new password" value={value.password}
                             onChange={handleChange} />
 
-                        <Button onClick={verify}>verify</Button>
+                        <Button onClick={Change}>Change</Button>
 
                     </>}
 

@@ -30,18 +30,24 @@ color: #a4c0d8;
 
 export const InputWrapper = styled.div`
 display: flex;
-
+box-shadow: rgb(3, 3, 3) 0px 2px 8px 0px;  
+border-radius: 30px;
 align-items: center;
   position: relative;
   width: 500px;
   margin-left: 20px;
   /* margin-right: 20px; */
   @media(max-width: 700px){
-    width: 230px;
+    width: 200px;
   }
   @media (max-width: 450px) {
     width: 150px;
   }
+
+
+  @media (max-width: 450px) {
+  width: 100px;
+}
   input{
     border: none;
     width: 500px;

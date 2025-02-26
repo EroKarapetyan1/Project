@@ -93,7 +93,7 @@ router.get('/profile', authMiddleware, async (req, res) => {
   if (!user) {
     return res.status(404).json({ error: "user not found" })
   }
-  res.json({ email: user.email, anun: user.anun, surName: user.surName, isVerified: user.isVerified });
+  res.json({ email: user.email, anun: user.anun, surName: user.surName, isVerified: user.isVerified , basket: user.basket});
 });
 
 
@@ -126,6 +126,9 @@ router.get('/profile', authMiddleware, async (req, res) => {
 
 router.put("/forgot-password", async (req, res) => {
   const { email } = req.body
+  if (!email) {
+    return res.status(400).json({message : 'pls enter tour email'})
+  }
   const user = await UserModel.findOne({ email })
   if (!user) {
     return res.status(404).json({ message: "User not found" })
