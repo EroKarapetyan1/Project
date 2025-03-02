@@ -46,6 +46,12 @@ const productApi = {
     clearBasket: (token) => axiosInstance.delete(`/basket/clear`, {
         headers: { Authorization: `Bearer ${token}` }
     }),
+
+    addReview: (data) => axiosInstance.post(`/review/add-review`, data),
+    getAllReview: (data) => axiosInstance.get(`/review/all-reviews`, data),
+    putReview: (data) => axiosInstance.put(`/review/put-reviews/:id`, data),
+    doneReview: (data) => axiosInstance.get(`/review/done-reviews`, data),
+
 };
 
 

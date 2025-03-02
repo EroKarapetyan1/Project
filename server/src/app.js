@@ -34,6 +34,8 @@ app.use("/api/auth", authRouter)
 app.use("/api", AddItmesRoute)
 app.use("/api/basket", getLikes)
 app.use("/filter", filter)
+app.use('/api/review', require('./routes/review'));
+
 // app.use("/add-like", addLikes)
 
 

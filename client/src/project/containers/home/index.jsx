@@ -8,8 +8,10 @@ import productApi, { useFetchProducts } from "../../api/servicesApi";
 import { IoSearch } from "react-icons/io5";
 import { IconSpan1, Img, Main, MainDiv, Name, Price, ProductCard } from "../../../globalStyles";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import {Reviews} from "../../components/review/index";
 
 export const MyHome = ({search}) => {
+    const token = localStorage.getItem("token"); 
     const fetchedItems = useFetchProducts();
     const [items, setItems] = useState([]);
     const [user, setUser] = useState({});
@@ -90,6 +92,11 @@ export const MyHome = ({search}) => {
                     </MainDiv>
                 ))}
             </Main>
+
+            {/* <Reviews token={token} isAdmin={false} /> */}
+
+
+
         </>
     );
 };

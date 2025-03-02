@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import M from "materialize-css";
-import { Img, Main, MainDiv, Name, ProductCard, Price } from "../../client/src/globalStyles";
+import { Img, Main, MainDiv, Name, ProductCard, Price, IconSpan } from "../../client/src/globalStyles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import productApiAdmin from "./api/servicesApi";
 import productApi from "../../client/src/project/api/servicesApi";
+import { MdOutlineReviews } from "react-icons/md";
+import { StyledLink } from "../../client/src/project/components/header/header";
 
 export const Admin = () => {
   const [value, setValue] = useState({});
@@ -90,7 +92,7 @@ export const Admin = () => {
 
   const putProducts = async (id) => {
     console.log(id);
-    
+
     try {
       const formData = new FormData();
       formData.append("modelName", value.modelName);
@@ -103,10 +105,10 @@ export const Admin = () => {
       }
       const token = localStorage.getItem("adminToken");
       console.log(token);
-      
-      const response = await productApiAdmin.putProduct(token , id , formData)
+
+      const response = await productApiAdmin.putProduct(token, id, formData)
       console.log(response.data);
-      
+
 
       setEditingProductId(null);
       setActive(prev => !prev);
@@ -155,6 +157,14 @@ export const Admin = () => {
           }
         `}
       </style>
+      <StyledLink to={"/AdminReview"}>
+      <IconSpan>
+        <MdOutlineReviews />
+      </IconSpan>
+
+      </StyledLink>
+     
+
 
       <div className="row">
         <div className="col s12 m6">
