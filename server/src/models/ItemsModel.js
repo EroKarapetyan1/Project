@@ -7,6 +7,7 @@ const ItemsSchema = new Schema({
   category: { type: String, required: true },
   brand: { type: String, required: true },
   image: { type: String, required: true },
+  images: { type: Array},
   like: {
     type: Boolean,
     default: false

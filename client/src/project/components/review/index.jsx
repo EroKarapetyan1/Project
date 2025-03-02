@@ -18,6 +18,7 @@ export const Reviews = ({ token, isAdmin }) => {
             const res = await axiosInstance.get(endpoint, {
                 headers: { Authorization: `Bearer ${token}` },
             });
+            res.data.reverse()
             setReviews(res.data);
         } catch (error) {
             console.error("Error fetching reviews:", error);
@@ -52,6 +53,8 @@ export const Reviews = ({ token, isAdmin }) => {
     return (
         <div>
             <h2>Reviews</h2>
+            {/* <Reviews token={token} isAdmin={false} /> */}
+
             {!isAdmin && (
                 <form onSubmit={addReview}>
                     <InputWrapper>        

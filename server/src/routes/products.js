@@ -8,9 +8,10 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 router.post("/AddProducts", async (req, res) => {
     try {
-        if (!req.files || !req.files.image) {
+        if (!req.files || !req.files.image || req.files.image.lenght === 0) {
             return res.status(400).json({ message: "Image file is required" });
         }
+        console.log(req.files);
 
         const uploadDir = path.join(path.resolve(), "/uploads");
 
@@ -26,12 +27,26 @@ router.post("/AddProducts", async (req, res) => {
 
         const uploadPath = path.join(uploadDir, imageName);
         await image.mv(uploadPath);
+        const imagesArray = []
+        const images = req.files.images
+        images.forEach(async e => {
+            const timestamp = Date.now() + e.name;
+            imagesArray.push(timestamp)
+            const uploadPath = path.join(path.resolve(), '/uploads', timestamp)
+            await e.mv(uploadPath);
+
+
+
+
+        });
+
         const newProduct = new ItemsModel({
             modelName: req.body.modelName || req.body.name,
             brand: req.body.brand,
             price: req.body.price,
             category: req.body.category,
-            image: imageName
+            image: imageName,
+            images: imagesArray
         });
         await newProduct.save();
         res.status(201).json({ success: true, data: newProduct });
@@ -61,10 +76,18 @@ router.delete("/DeleteProducts/:id", authMiddleware, async (req, res) => {
     try {
         const { id } = req.params
         const product = await ItemsModel.findById(id)
-            const pathImage = path.join(path.resolve(), "/uploads/", product.image)
+        const pathImage = path.join(path.resolve(), "/uploads/", product.image)
         if (fs.existsSync(pathImage)) {
             fs.unlinkSync(pathImage, () => { })
         }
+
+        product.images.forEach(e => {
+            const imagePath = path.join(path.resolve(), 'uploads', e)
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath, () => { })
+            }
+        })
+
         await ItemsModel.findByIdAndDelete(id)
         res.status(200).send({ data: product })
 
@@ -83,7 +106,7 @@ router.put("/PutProducts/:id", authMiddleware, async (req, res) => {
 
     const { id } = req.params;
     const { modelName, price, category, brand } = req.body;
-    let image = null; 
+    let image = null;
 
     try {
         const product = await ItemsModel.findById(id);
@@ -106,7 +129,7 @@ router.put("/PutProducts/:id", authMiddleware, async (req, res) => {
             await imageFile.mv(uploadPath);
             image = imageName;
         } else {
-            image = product.image; 
+            image = product.image;
         }
 
         const updateObj = {
@@ -114,7 +137,7 @@ router.put("/PutProducts/:id", authMiddleware, async (req, res) => {
             price: price || product.price,
             category: category || product.category,
             brand: brand || product.brand,
-            image: image, 
+            image: image,
         };
 
         const updatedProduct = await ItemsModel.findByIdAndUpdate(id, updateObj, { new: true });

@@ -7,6 +7,7 @@ import productApiAdmin from "./api/servicesApi";
 import productApi from "../../client/src/project/api/servicesApi";
 import { MdOutlineReviews } from "react-icons/md";
 import { StyledLink } from "../../client/src/project/components/header/header";
+import { MyHeader } from "../../client/src/project/components/header";
 
 export const Admin = () => {
   const [value, setValue] = useState({});
@@ -15,24 +16,24 @@ export const Admin = () => {
   const [editingProductId, setEditingProductId] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const nav = useNavigate()
-  const addData = async () => {
-    const formData = new FormData();
-    formData.append("modelName", value.modelName);
-    formData.append("brand", value.brand);
-    formData.append("price", value.price);
-    formData.append("category", value.category);
-    formData.append("image", selectedFile);
+  // const addData = async () => {
+  //   const formData = new FormData();
+  //   formData.append("modelName", value.modelName);
+  //   formData.append("brand", value.brand);
+  //   formData.append("price", value.price);
+  //   formData.append("category", value.category);
+  //   formData.append("image", selectedFile);
 
-    try {
-      const res = await axios.post("/api/AddProducts", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      });
-      console.log("Ապրանքը հաջողությամբ ավելացվեց", res);
-      setActive(e => !e);
-    } catch (error) {
-      console.error("Սխալ ապրանքի ավելացման ժամանակ:", error);
-    }
-  };
+  //   try {
+  //     const res = await axios.post("/api/AddProducts", formData, {
+  //       headers: { "Content-Type": "multipart/form-data" }
+  //     });
+  //     console.log("Ապրանքը հաջողությամբ ավելացվեց", res);
+  //     setActive(e => !e);
+  //   } catch (error) {
+  //     console.error("Սխալ ապրանքի ավելացման ժամանակ:", error);
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,11 +59,24 @@ export const Admin = () => {
     getData();
   }, [active]);
 
-  const handleFileChange = (e) => {
+  const handleFileChangeMain = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
     setValue({ ...value, image: file });
   };
+
+  const handleFileChangeAll = (e) => {
+    const file = Array.from(e.target.files);
+    console.log(file);
+
+    setValue({ ...value, images: file });
+  };
+
+
+
+
+
+
   const deletePhone = async (id) => {
     try {
       const token = localStorage.getItem('adminToken')
@@ -70,7 +84,7 @@ export const Admin = () => {
         nav('/')
         return
       }
-      const res = await productApi.DeleteProducts(id, token);
+      const res = await productApiAdmin.DeleteProduct(id, token);
       console.log("ապրանքը հաջողությամբ ջնջվեց", res);
       setActive(e => !e);
     } catch (error) {
@@ -139,6 +153,10 @@ export const Admin = () => {
       data.append("image", selectedFile);
     }
 
+    value.images.forEach((file) => {
+      data.append(`images`, file)
+    })
+
     try {
       const res = await productApi.products(data);
       console.log("Product added successfully", res);
@@ -157,13 +175,16 @@ export const Admin = () => {
           }
         `}
       </style>
+      {/* <MyHeader /> */}
+
+
       <StyledLink to={"/AdminReview"}>
-      <IconSpan>
-        <MdOutlineReviews />
-      </IconSpan>
+        <IconSpan>
+          <MdOutlineReviews />
+        </IconSpan>
 
       </StyledLink>
-     
+
 
 
       <div className="row">
@@ -174,10 +195,20 @@ export const Admin = () => {
                 <div className="file-field input-field">
                   <div className="btn">
                     <span>File</span>
-                    <input type="file" name="image" id="img" onChange={handleFileChange} />
+                    <input type="file" name="image" id="img" onChange={handleFileChangeMain} />
                   </div>
                   <div className="file-path-wrapper">
                     <label htmlFor="img">Ընտրեք նկարը</label>
+                    <input className="file-path validate" type="text" />
+                  </div>
+                </div>
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>File</span>
+                    <input type="file" name="image" id="img" onChange={handleFileChangeAll} multiple />
+                  </div>
+                  <div className="file-path-wrapper">
+                    <label htmlFor="img">Ընտրեք միքանի նկարը</label>
                     <input className="file-path validate" type="text" />
                   </div>
                 </div>
@@ -257,6 +288,18 @@ export const Admin = () => {
                   alt={e.modelName}
                   style={{ width: "100%" }}
                 />
+                {/* <div>
+                  {e.images.map(el => {
+                    return (
+                      <div key={el.name}>
+
+                        <img src={`http://localhost:3001/uploads/${el}`} />
+                      </div>
+                    )
+                  })}
+
+
+                </div> */}
               </Img>
               <Name>{e.modelName}</Name>
               <Price>{e.price} AMD</Price>

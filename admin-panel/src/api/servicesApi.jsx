@@ -7,6 +7,11 @@ const productApiAdmin = {
             Authorization: `Bearer ${token}`
         }
     }),
+    DeleteProduct: (id ,token ) => axiosInstance.delete(`/DeleteProducts/${id}` , {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }),
 };
 
 
