@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { Button, InputWrapper1 } from "../../../globalStyles";
 import { InputWrapper } from "../header/header";
+import { FaStar } from "react-icons/fa6";
+import { StarSpan } from "./styled";
 
 export const Reviews = ({ token, isAdmin }) => {
     const [reviews, setReviews] = useState([]);
     const [desc, setDesc] = useState("");
-    const [starCount, setStarCount] = useState(5);
-
+    const [starCount, setStarCount] = useState(0);
+    const arr = [1, 2, 3, 4, 5]
     useEffect(() => {
         fetchReviews();
     }, []);
@@ -49,7 +51,8 @@ export const Reviews = ({ token, isAdmin }) => {
             console.error("Error updating review:", error);
         }
     };
-
+    console.log(starCount);
+    
     return (
         <div>
             <h2>Reviews</h2>
@@ -57,15 +60,23 @@ export const Reviews = ({ token, isAdmin }) => {
 
             {!isAdmin && (
                 <form onSubmit={addReview}>
-                    <InputWrapper>        
-                    <input value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Write your review..." required />
-                
+                    <InputWrapper>
+                        <input value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Write your review..." required />
+
 
                         <input type="number" value={starCount} min="1" max="5" onChange={(e) => setStarCount(e.target.value)} required />
-
                     </InputWrapper>
+                    {arr.map((e, i) => {
+                        return (
+                            <>
+                                <StarSpan onClick={() => setStarCount(e)} style={{color : e <= starCount ? "yellow" : "gray"}}>
+                                    <FaStar />
+                                </StarSpan>
+                            </>
+                        )
+                    })}
 
-                    <Button style={{marginTop: '30px', marginLeft: '30px'}} type="submit">Add Review</Button>
+                    <Button style={{ marginTop: '30px', marginLeft: '30px' }} type="submit">Add Review</Button>
                 </form>
             )}
 

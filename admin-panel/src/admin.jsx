@@ -279,94 +279,98 @@ export const Admin = () => {
 
 
       <Main>
-        {items.map((e, i) => (
-          <MainDiv key={e._id}>
-            <ProductCard>
-              <Img>
-                <img
-                  src={`http://localhost:3001/uploads/${e.image}`}
-                  alt={e.modelName}
-                  style={{ width: "100%" }}
-                />
-                {/* <div>
-                  {e.images.map(el => {
-                    return (
-                      <div key={el.name}>
+        {items.map((e, i) => {
+          return (
 
-                        <img src={`http://localhost:3001/uploads/${el}`} />
+
+            <MainDiv key={e._id}>
+              <ProductCard>
+                <Img>
+                  <img
+                    src={`http://localhost:3001/uploads/${e.image}`}
+                    alt={e.modelName}
+                    style={{ width: "100%" }}
+                  />
+                  {/* <div>
+                    {e.images.map(el => {
+                      return (
+                        <div key={el.name}>
+
+                          <img src={`http://localhost:3001/uploads/${el}`} />
+                        </div>
+                      )
+                    })}
+
+
+                  </div> */}
+                </Img>
+                <Name>{e.modelName}</Name>
+                <Price>{e.price} AMD</Price>
+                <div className="card-action">
+                  <button className="waves-effect waves-light btn" onClick={() => deletePhone(e._id)}>ջնջել</button>
+                </div>
+                <div className="card-action">
+                  <button className="waves-effect waves-light btn" onClick={() => openEditForm(e._id)}>Փոփոխել</button>
+                </div>
+
+                {editingProductId === e._id && (
+                  <>
+
+
+                    <form action="#">
+                      <div className="file-field input-field">
+                        <div className="btn">
+                          <span>File</span>
+                          <input type="file" name="image" id="img" onChange={handleFileChange} />
+                        </div>
+                        <div className="file-path-wrapper">
+                          <label htmlFor="img">Ընտրեք նկարը</label>
+                          <input className="file-path validate" type="text" />
+                        </div>
                       </div>
-                    )
-                  })}
+                    </form>
+                    <input
+                      type="text"
+                      name="modelName"
+                      value={value.modelName || ''}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="text"
+                      name="price"
+                      value={value.price || ''}
+                      onChange={handleChange}
+                    />
 
-
-                </div> */}
-              </Img>
-              <Name>{e.modelName}</Name>
-              <Price>{e.price} AMD</Price>
-              <div className="card-action">
-                <button className="waves-effect waves-light btn" onClick={() => deletePhone(e._id)}>ջնջել</button>
-              </div>
-              <div className="card-action">
-                <button className="waves-effect waves-light btn" onClick={() => openEditForm(e._id)}>Փոփոխել</button>
-              </div>
-
-              {editingProductId === e._id && (
-                <>
-
-
-                  <form action="#">
-                    <div className="file-field input-field">
-                      <div className="btn">
-                        <span>File</span>
-                        <input type="file" name="image" id="img" onChange={handleFileChange} />
-                      </div>
-                      <div className="file-path-wrapper">
-                        <label htmlFor="img">Ընտրեք նկարը</label>
-                        <input className="file-path validate" type="text" />
-                      </div>
+                    <div className="input-field">
+                      <select name="category" value={value.category} onChange={handleChange}>
+                        <option value="" disabled selected>Ընտրեք տեսակը</option>
+                        <option value="Phones">Հեռախոսներ</option>
+                        <option value="Watches">Ժամացույցներ</option>
+                        <option value="Notebooks">Նոթբուքներ</option>
+                        <option value="Video-cards">Տեսա քարտեր</option>
+                        <option value="Computers">Համակարգիչներ</option>
+                        <option value="accessories">Աքսեսուարներ</option>
+                      </select>
                     </div>
-                  </form>
-                  <input
-                    type="text"
-                    name="modelName"
-                    value={value.modelName || ''}
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="text"
-                    name="price"
-                    value={value.price || ''}
-                    onChange={handleChange}
-                  />
 
-                  <div className="input-field">
-                    <select name="category" value={value.category} onChange={handleChange}>
-                      <option value="" disabled selected>Ընտրեք տեսակը</option>
-                      <option value="Phones">Հեռախոսներ</option>
-                      <option value="Watches">Ժամացույցներ</option>
-                      <option value="Notebooks">Նոթբուքներ</option>
-                      <option value="Video-cards">Տեսա քարտեր</option>
-                      <option value="Computers">Համակարգիչներ</option>
-                      <option value="accessories">Աքսեսուարներ</option>
-                    </select>
-                  </div>
+                    <div className="input-field">
+                      <select name="brand" value={value.brand} onChange={handleChange}>
+                        <option value="" disabled selected>Ընտրեք ապրանքանիշը</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Xiaomi">Xiaomi</option>
+                        <option value="NVIDIA">Nvidia</option>
+                      </select>
+                    </div>
 
-                  <div className="input-field">
-                    <select name="brand" value={value.brand} onChange={handleChange}>
-                      <option value="" disabled selected>Ընտրեք ապրանքանիշը</option>
-                      <option value="Samsung">Samsung</option>
-                      <option value="Apple">Apple</option>
-                      <option value="Xiaomi">Xiaomi</option>
-                      <option value="NVIDIA">Nvidia</option>
-                    </select>
-                  </div>
-
-                  <button className="waves-effect waves-light btn" onClick={() => putProducts(e._id)}>Պահպանել</button>
-                </>
-              )}
-            </ProductCard>
-          </MainDiv>
-        ))}
+                    <button className="waves-effect waves-light btn" onClick={() => putProducts(e._id)}>Պահպանել</button>
+                  </>
+                )}
+              </ProductCard>
+            </MainDiv>
+          )
+        })}
       </Main>
     </>
   );

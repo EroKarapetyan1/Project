@@ -19,6 +19,7 @@ const productApi = {
         }
     }),
     GetProducts: (params) => axiosInstance.get(`/GetProducts`, { params }),
+    GetProductsById: (id) => axiosInstance.get(`/GetProductsById/${id}`),
     GetLikedProduct: (token) => axiosInstance.get(`/basket`, {
         headers: {
             Authorization: `Bearer ${token}`

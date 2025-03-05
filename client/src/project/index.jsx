@@ -16,6 +16,7 @@ import { ProductFilter } from "./components/filter/product-filter";
 import { CartPage } from "./components/Korzina/cartpage";
 import { ForgotPassword } from "./components/forgot-password";
 import { AllReviews } from "./components/review/reviews";
+import { Products } from "./containers/productPage";
 
 
 
@@ -41,6 +42,8 @@ export const Main = () => {
                 <Route path="/basket" element={<CartPage/>}/> 
                 <Route path="/ForgorPassword" element={<ForgotPassword/>}/> 
                 <Route path="/AllReviews" element={<AllReviews/>}/> 
+                <Route path="/products/:id" element={<Products/>}/> 
+
 
             </Routes>
 

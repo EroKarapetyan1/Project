@@ -66,6 +66,17 @@ router.get("/GetProducts", async (_, res) => {
     }
 });
 
+router.get("/GetProductsById/:id", async (req, res) => {
+    try {
+        console.log(req.params);
+        
+        const {id} = req.params
+        const GetProducts = await ItemsModel.findById(id)
+        res.status(200).send({ data: GetProducts })
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
 
 router.delete("/DeleteProducts/:id", authMiddleware, async (req, res) => {
 

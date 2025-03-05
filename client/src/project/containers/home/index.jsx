@@ -9,8 +9,9 @@ import { IoSearch } from "react-icons/io5";
 import { IconSpan1, Img, Main, MainDiv, Name, Price, ProductCard } from "../../../globalStyles";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import {Reviews} from "../../components/review/index";
-
+import {useNavigate} from'react-router-dom'
 export const MyHome = ({search}) => {
+    const navigate = useNavigate();
     const token = localStorage.getItem("token"); 
     const fetchedItems = useFetchProducts();
     const [items, setItems] = useState([]);
@@ -62,6 +63,11 @@ export const MyHome = ({search}) => {
     };
     console.log(filteredItems);
     
+    const getOne = (id) => {
+        navigate(`/products/${id}`);
+    };
+
+
     return (
         <>
             <MyCarousel />
@@ -79,7 +85,7 @@ export const MyHome = ({search}) => {
                                     <IoMdHeartEmpty />
                                 </IconSpan1>
                             )}
-                            <Img>
+                            <Img onClick={() => getOne(e._id)} src={e.image}>
                                 <img
                                     src={`http://localhost:3001/uploads/${e.image}`}
                                     alt={e.modelName}
